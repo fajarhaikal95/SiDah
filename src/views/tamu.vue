@@ -1,14 +1,16 @@
 <template>
     <div class="about container">
-        <sidebar-menu :menu="menu" /> <!-- ini Sidebar ya -->
-        <div class="d-flex justify-content-between my-2">
-            <h1><b-img thumbnail fluid src="../assets/sidah.png" alt="Image 1"></b-img>Data Tamu</h1>
-            
-          
-  
-  <!-- ------------------------------------ Bagian Modal Form Tamu ------------------------------------------- --> 
-            <b-button variant="success" @click="$bvModal.show('modal-scoped')">Add Data +</b-button>
-            <b-modal id="modal-scoped" class="m-2">
+
+        <sidebar-menu :menu="menu" style="width: 250px;"/> <!-- Bagian SideBar -->
+
+        <div class="d-flex justify-content-between my-5"> <!-- Bagian Header -->
+            <h1><img src="../assets/sidah.png" alt="Image 1" width="75px" height="75px" class="mx-3" />Data Tamu</h1> 
+            <b-button variant="success" @click="$bvModal.show('modal-scoped')" style=" position: relative; top:20px; height: 40px;">
+              Add Data +
+            </b-button>               
+        </div>
+           
+        <b-modal id="modal-scoped" class="m-2"> <!--  Bagian Modal Form Tamu  -->
                 <template #modal-header="{}"> 
                   <h5>Tambah Data Tamu</h5>
                 </template>
@@ -49,30 +51,29 @@
                     </div>
                 </template>
                             
-            </b-modal>
-        </div>
+        </b-modal>
   
-  <!-- -------------------------------------Bagian Tabel Tamu--------------------------------------------------  -->
-      <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nama</th>
-        <th scope="col">Instansi</th>
-        <th scope="col">No Telpon</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(data, i) in listTable " :key="i"> 
-        <td>{{i+1}}</td>
-        <td>{{data.name}}</td>
-        <td>Dinas Kota Depok</td>
-        <td>08987654321</td>
-      </tr>
-    </tbody>
-  </table>
+        <table class="table"> <!-- Bagian Tabel Tamu  -->
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Instansi</th>
+                <th scope="col">No Telpon</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(data, i) in listTable " :key="i"> 
+                <td>{{i+1}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.email}}</td>
+                <td>08987654321</td>
+              </tr>
+            </tbody>
+        </table>
+
     </div>
-  </template>
+</template>
   
   <script> 
     import axios from "axios"
@@ -114,14 +115,12 @@
                           //         title: 'Sub Link'
                           //     }
                           // ]
-                      }
+                      },
                   ],
         listTable: []
       }
-    },
-    
-    
-  
+    },    
+     
     mounted() {
       this.getUserData()
     },
@@ -130,7 +129,7 @@
         axios.get('https://jsonplaceholder.typicode.com/users')
         .then(({data}) => {
           this.listTable = data 
-          console.log(this.listTable)
+          console.log(data)
         })
       },
       // berhasil(){

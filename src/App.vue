@@ -25,4 +25,21 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:hover {
+  background-color: coral;
+}
+
+tr {
+  width: 50%;
+}
+
+tr,
+td {
+  width: 50px;
+  word-wrap: break-word;
+}
 </style>
